@@ -3,6 +3,13 @@ html, body {
     height: 100%;
 }
 
+a {
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
 .wall {
     width: 100%;
     height: 100%;
@@ -403,7 +410,7 @@ html, body {
     content: '';
     width: 0;
     height: 0;
-    border-width: 5px 11px 0px 11px;
+    border-width: 5px 11px 0 11px;
     position: absolute;
     border-style: solid;
     border-color: transparent transparent transparent #ffffff;
@@ -430,7 +437,7 @@ html, body {
 
 .logo {
     color: #D13C3F;
-    font-family: "Microsoft YaHei";
+    font-family: "Microsoft YaHei", serif;
     font-weight: bold;
     font-size: 13px;
     position: absolute;

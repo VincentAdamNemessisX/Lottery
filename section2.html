@@ -6,6 +6,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"/>
     <title>抽奖小程序</title>
+    <link rel="icon" href="img/favicon.png">
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/wall.css">
     <style type="text/css">
@@ -29,10 +30,11 @@
         .result span {
             display: inline-block;
             font-size: 25px;
+            font-weight: bolder;
             width: 150px;
-            background: #fff;
+            background: yellow;
             line-height: 30px;
-            color: #000;
+            color: rebeccapurple;
             margin: 5px;
             border-radius: 10px;
             box-shadow: 0 5px 10px rgba(0, 0, 0, 0.8);
@@ -48,6 +50,7 @@
 
         button {
             overflow: visible;
+            border-radius: 20%;
         }
 
         button, select {
@@ -75,6 +78,7 @@
             -webkit-box-sizing: border-box;
             -moz-box-sizing: border-box;
             box-sizing: border-box;
+            border-radius: 20%;
         }
 
         .pure-button {
@@ -86,7 +90,7 @@
             border: 0 rgba(0, 0, 0, 0);
             background-color: #E6E6E6;
             text-decoration: none;
-            border-radius: 2px;
+            border-radius: 30%;
         }
 
         .pure-button:focus {
@@ -137,6 +141,7 @@
             padding: 10px 0;
             text-align: center;
             width: 50px;
+            border-radius: 20%;
         }
 
         .mask {
@@ -203,7 +208,7 @@
 			item.index = index;
 			var key = getKey(item);
 			var color = choosed[key] ? 'red' : 'white';
-			html.push('<li><a href="#" style="color: ' + color + ';">' + item.name + '</a></li>');
+			html.push('<li><a href="#" style="color: ' + color + '; background-color: blue;' + '">' + item.name + '</a></li>');
 		});
 		html.push('</ul>');
 		return html.join('');
@@ -213,7 +218,7 @@
 		var color = 'red';
 		var ret = member
 			.filter(function (item) {
-                return !choosed[getKey(item)];
+				return !choosed[getKey(item)];
 			})
 			.map(function (m) {
 				return Object.assign({

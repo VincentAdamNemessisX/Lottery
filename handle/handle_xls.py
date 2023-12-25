@@ -1,6 +1,7 @@
 import xlwings as xs
 
 students_list = []
+teachers_list = []
 
 
 def update_student_list(sheet_sec, range_start, range_end, range_cls):
@@ -8,6 +9,13 @@ def update_student_list(sheet_sec, range_start, range_end, range_cls):
         student_dict = {'no.': int(sheet_sec.range('A' + str(i)).value), 'name': sheet_sec.range('C' + str(i)).value,
                         'class': range_cls, 'fix': 'false'}
         students_list.append(student_dict)
+
+
+def update_teacher_list(sheet_sec, range_start, range_end, range_cls):
+    for i in range(range_start, range_end + 1):
+        teacher_dict = {'no.': int(sheet_sec.range('A' + str(i)).value), 'name': sheet_sec.range('B' + str(i)).value,
+                        'class': range_cls, 'fix': 'false'}
+        teachers_list.append(teacher_dict)
 
 
 def get_section_1_grade_1(sheet_sec):
@@ -66,6 +74,12 @@ def get_section_1_grade_3(sheet_sec):
     student_class = sheet_sec.range('A337').value.replace(' ', '')
     if student_class == '三年级八班':
         update_student_list(sheet_sec, 339, 380, student_class)
+
+
+def get_section_1_teachers(sheet_sec):
+    teacher_class = sheet_sec.range('A1').value.replace(' ', '')
+    if teacher_class == '一二三年级':
+        update_teacher_list(sheet_sec, 2, 32, teacher_class + "老师")
 
 
 def get_section_2_grade_4(sheet_sec):
@@ -132,6 +146,12 @@ def get_section_2_grade_5(sheet_sec):
     student_class = sheet_sec.range('A460').value.replace(' ', '')
     if student_class == '五年级十班':
         update_student_list(sheet_sec, 462, 508, student_class)
+
+
+def get_section_2_teachers(sheet_sec):
+    teacher_class = sheet_sec.range('a33').value.replace(' ', '')
+    if teacher_class == '四五年级':
+        update_teacher_list(sheet_sec, 34, 73, teacher_class + "老师")
 
 
 def get_section_3_grade_6(sheet_sec):
@@ -206,37 +226,55 @@ def get_section_3_grade_8(sheet_sec):
         update_student_list(sheet_sec, 168, 213, student_class)
 
 
+def get_section_3_teachers(sheet_sec):
+    teacher_class = sheet_sec.range('a74').value.replace(' ', '')
+    if teacher_class == '六七八年级':
+        update_teacher_list(sheet_sec, 75, 121, teacher_class + "老师")
+
+
 def get_section_1_data(bok):
     get_section_1_grade_1(bok.sheets[1])
     get_section_1_grade_2(bok.sheets[2])
     get_section_1_grade_3(bok.sheets[3])
+    get_section_1_teachers(book.sheets[9])
     # print(len(students_list))
     param_define = "let member = "
     students_list_str = str(students_list).replace("'true'", "true")
+    students_list_str = students_list_str.replace("]", ",")
+    teachers_list_str = str(teachers_list).replace("'true'", "true")
+    teachers_list_str = teachers_list_str.replace("[", "")
     with open('../js/member_section_1.js', 'w') as f:
-        f.write(param_define + students_list_str)
+        f.write(param_define + students_list_str + teachers_list_str)
 
 
 def get_section_2_data(bok):
     get_section_2_grade_4(bok.sheets[4])
     get_section_2_grade_5(bok.sheets[5])
+    get_section_2_teachers(book.sheets[9])
     # print(len(students_list))
     param_define = "let member = "
     students_list_str = str(students_list).replace("'true'", "true")
+    students_list_str = students_list_str.replace("]", ",")
+    teachers_list_str = str(teachers_list).replace("'true'", "true")
+    teachers_list_str = teachers_list_str.replace("[", "")
     with open('../js/member_section_2.js', 'w') as f:
-        f.write(param_define + students_list_str)
+        f.write(param_define + students_list_str + teachers_list_str)
 
 
 def get_section_3_data(bok):
     get_section_3_grade_6(bok.sheets[6])
     get_section_3_grade_7(bok.sheets[7])
     get_section_3_grade_8(bok.sheets[8])
+    get_section_3_teachers(book.sheets[9])
     # get_section_3_grade_9(bok.sheets[9])
     # print(len(students_list))
     param_define = "let member = "
     students_list_str = str(students_list).replace("'true'", "true")
+    students_list_str = students_list_str.replace("]", ",")
+    teachers_list_str = str(teachers_list).replace("'true'", "true")
+    teachers_list_str = teachers_list_str.replace("[", "")
     with open('../js/member_section_3.js', 'w') as f:
-        f.write(param_define + students_list_str)
+        f.write(param_define + students_list_str + teachers_list_str)
 
 
 def get_all_section_data(bok):
@@ -248,22 +286,32 @@ def get_all_section_data(bok):
     get_section_3_grade_6(bok.sheets[6])
     get_section_3_grade_7(bok.sheets[7])
     get_section_3_grade_8(bok.sheets[8])
+    get_section_1_teachers(book.sheets[9])
+    get_section_2_teachers(book.sheets[9])
+    get_section_3_teachers(book.sheets[9])
     # get_section_3_grade_9(bok.sheets[9])
     # print(len(students_list))
     param_define = "let member = "
     students_list_str = str(students_list).replace("'true'", "true")
+    students_list_str = students_list_str.replace("]", ",")
+    teachers_list_str = str(teachers_list).replace("'true'", "true")
+    teachers_list_str = teachers_list_str.replace("[", "")
     with open('../js/member.js', 'w') as f:
-        f.write(param_define + students_list_str)
+        f.write(param_define + students_list_str + teachers_list_str)
 
 
 if __name__ == '__main__':
     with xs.App(visible=False) as app:
         book = app.books.open('all_students_data.xlsx')
         students_list.clear()
+        teachers_list.clear()
         get_section_1_data(book)
         students_list.clear()
+        teachers_list.clear()
         get_section_2_data(book)
         students_list.clear()
+        teachers_list.clear()
         get_section_3_data(book)
         students_list.clear()
+        teachers_list.clear()
         get_all_section_data(book)

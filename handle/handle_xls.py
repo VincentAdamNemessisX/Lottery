@@ -226,9 +226,24 @@ def get_section_3_grade_8(sheet_sec):
         update_student_list(sheet_sec, 168, 213, student_class)
 
 
+def get_section_3_grade_9(sheet_sec):
+    student_class = sheet_sec.range('A2').value.replace(' ', '')
+    if student_class == '九年级一班':
+        update_student_list(sheet_sec, 4, 55, student_class)
+    student_class = sheet_sec.range('A60').value.replace(' ', '')
+    if student_class == '九年级二班':
+        update_student_list(sheet_sec, 62, 112, student_class)
+    student_class = sheet_sec.range('A117').value.replace(' ', '')
+    if student_class == '九年级三班':
+        update_student_list(sheet_sec, 119, 167, student_class)
+    student_class = sheet_sec.range('A172').value.replace(' ', '')
+    if student_class == '九年级四班':
+        update_student_list(sheet_sec, 174, 221, student_class)
+
+
 def get_section_3_teachers(sheet_sec):
     teacher_class = sheet_sec.range('a74').value.replace(' ', '')
-    if teacher_class == '六七八年级':
+    if teacher_class == '六七八九年级':
         update_teacher_list(sheet_sec, 75, 121, teacher_class + "老师")
 
 
@@ -236,7 +251,7 @@ def get_section_1_data(bok):
     get_section_1_grade_1(bok.sheets[1])
     get_section_1_grade_2(bok.sheets[2])
     get_section_1_grade_3(bok.sheets[3])
-    get_section_1_teachers(book.sheets[9])
+    get_section_1_teachers(book.sheets[10])
     # print(len(students_list))
     param_define = "let member = "
     students_list_str = str(students_list).replace("'true'", "true")
@@ -250,7 +265,7 @@ def get_section_1_data(bok):
 def get_section_2_data(bok):
     get_section_2_grade_4(bok.sheets[4])
     get_section_2_grade_5(bok.sheets[5])
-    get_section_2_teachers(book.sheets[9])
+    get_section_2_teachers(book.sheets[10])
     # print(len(students_list))
     param_define = "let member = "
     students_list_str = str(students_list).replace("'true'", "true")
@@ -265,8 +280,8 @@ def get_section_3_data(bok):
     get_section_3_grade_6(bok.sheets[6])
     get_section_3_grade_7(bok.sheets[7])
     get_section_3_grade_8(bok.sheets[8])
-    get_section_3_teachers(book.sheets[9])
-    # get_section_3_grade_9(bok.sheets[9])
+    get_section_3_grade_9(bok.sheets[9])
+    get_section_3_teachers(book.sheets[10])
     # print(len(students_list))
     param_define = "let member = "
     students_list_str = str(students_list).replace("'true'", "true")
@@ -286,11 +301,11 @@ def get_all_section_data(bok):
     get_section_3_grade_6(bok.sheets[6])
     get_section_3_grade_7(bok.sheets[7])
     get_section_3_grade_8(bok.sheets[8])
-    get_section_1_teachers(book.sheets[9])
-    get_section_2_teachers(book.sheets[9])
-    get_section_3_teachers(book.sheets[9])
-    # get_section_3_grade_9(bok.sheets[9])
-    # print(len(students_list))
+    get_section_3_grade_9(bok.sheets[9])
+    get_section_1_teachers(book.sheets[10])
+    get_section_2_teachers(book.sheets[10])
+    get_section_3_teachers(book.sheets[10])
+    print(len(students_list) + len(teachers_list))
     param_define = "let member = "
     students_list_str = str(students_list).replace("'true'", "true")
     students_list_str = students_list_str.replace("]", ",")

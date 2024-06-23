@@ -1,3 +1,4 @@
 .idea
 node_modules
 handle/all_students_data.xlsx
+/data/all_students_data.xlsx
